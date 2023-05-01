@@ -1,0 +1,44 @@
+---
+import { appConfig } from "../config";
+
+const { background } = appConfig;
+
+const { top: topGradient, bottom: bottomGradient } =
+  background.type === "bg/gradient" ? background : { top: null, bottom: null };
+const { color: colorSolid } =
+  background.type === "bg/solid" ? background : { color: null };
+---
+
+<div>
+  {
+    background.type === "bg/gradient" && (
+      <div class="bg gradient">
+        <slot />
+      </div>
+    )
+  }
+  {
+    background.type === "bg/solid" && (
+      <div class="bg solid">
+        <slot />
+      </div>
+    )
+  }
+</div>
+
+<style define:vars={{ topGradient, bottomGradient, colorSolid }}>
+  .bg {
+    min-height: 100vh;
+  }
+  .gradient {
+    background: linear-gradient(
+      to bottom,
+      var(--topGradient),
+      var(--bottomGradient)
+    );
+  }
+
+  .solid {
+    background: var(--colorSolid);
+  }
+</style>

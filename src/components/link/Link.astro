@@ -1,0 +1,25 @@
+---
+import type { AppLink } from "../../appConfig";
+import Custom from "./Custom.astro";
+import GitHub from "./GitHub.astro";
+import MyAnimeList from "./MyAnimeList.astro";
+import Twitter from "./Twitter.astro";
+
+export type Props = AppLink;
+---
+
+<a href={Astro.props.url} target="_blank" referrerpolicy="no-referrer">
+  {Astro.props.type === "link/github" && <GitHub {...Astro.props} />}
+  {Astro.props.type === "link/twitter" && <Twitter {...Astro.props} />}
+  {Astro.props.type === "link/mal" && <MyAnimeList {...Astro.props} />}
+  {Astro.props.type === "link/custom" && <Custom {...Astro.props} />}
+</a>
+
+<style>
+  a {
+    display: block;
+
+    color: initial;
+    text-decoration: initial;
+  }
+</style>

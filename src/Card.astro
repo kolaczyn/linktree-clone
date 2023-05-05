@@ -1,17 +1,12 @@
 ---
 import { appConfig } from "../config";
+import Link from "./components/link/Link.astro";
 ---
 
 <h1>{appConfig.username}</h1>
 <h2>{appConfig.about}</h2>
 <hr />
-{
-  appConfig.links.map((x) => (
-    <a class="link" href={x.url}>
-      {x.type}
-    </a>
-  ))
-}
+{appConfig.links.map((x) => <Link {...x} />)}
 
 <style>
   h1 {
